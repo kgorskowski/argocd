@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: monitoring
-  namespace: monitoring
+  namespace: argocd
 spec:
   generators:
   - git:
@@ -21,7 +21,7 @@ spec:
           selfHeal: true
       source:
         repoURL: https://github.com/kgorskowski/argocd
-        targetRevision: master
+        targetRevision: main
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
