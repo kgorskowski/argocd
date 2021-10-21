@@ -1,8 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: pricelist
-  namespace: openshift-gitops
+  name: monitoring
+  namespace: monitoring
 spec:
   generators:
   - git:
