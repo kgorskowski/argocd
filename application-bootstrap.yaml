@@ -26,3 +26,33 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: monitoring
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: mediaserver
+  namespace: mediaserver
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/kgorskowski/argocd
+      revision: main
+      directories:
+      - path: cluster-bootstrap/media/*
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: mediaserver
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+      source:
+        repoURL: https://github.com/kgorskowski/argocd
+        targetRevision: main
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: mediaserver
